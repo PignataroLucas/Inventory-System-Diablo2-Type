@@ -1,20 +1,28 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
-
-public class Slots : MonoBehaviour
+namespace InventoryGridSystem
 {
-    //public IntVector2 gridPos;
-    public Text text;
-
-    public GameObject storedItemObject;
-    //public IntVector2 storedItemSize;
-    //public IntVector2 storedItemStartPos;
-    //public ItemClass storedItemClass;
-    public bool isOccupied;
-
-    private void Start()
+    public class Slots : MonoBehaviour
     {
-        //text.text = gridPos.x + "," + gridPos.y;
+        public IntVector2 GridPos;
+        public Text text;
+
+        public GameObject storedItemObject;
+        public IntVector2 StoredItemSize;
+        public IntVector2 StoredItemStartPos;
+        //public ItemClass storedItemClass;
+        public bool isOccupied;
+
+        public Slots(IntVector2 gridPos)
+        {
+            GridPos = gridPos;
+        }
+
+        private void Start()
+        {
+            text.text = GridPos.X + "," + GridPos.Y;
+        }
     }
 }
