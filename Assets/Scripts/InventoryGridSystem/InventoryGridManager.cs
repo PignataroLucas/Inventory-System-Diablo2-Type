@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Net.Mime;
 using UnityEditor;
+using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -199,7 +200,27 @@ namespace InventoryGridSystem
 
         private void StoreItem(GameObject item)
         {
-            
+            Slots slot;
+            IntVector2 itemSize = item.GetComponent<Item>().item.Size;
+            for (int y = 0; y < itemSize.Y; y++)
+            {
+                for (int x = 0; x < itemSize.X; x++)
+                {
+                    slot = SlotGrid[_totalOffset.X + x, _totalOffset.Y + y].GetComponent<Slots>();
+                    slot.storedItemObject = item;
+                    slot.storedItemClass = item.GetComponent<Item>().item;
+                    slot.StoredItemSize = itemSize;
+                    slot.StoredItemStartPos = _totalOffset;
+                    slot.isOccupied = true;
+                    SlotGrid[_totalOffset.X + x, _totalOffset.Y + y].GetComponent<Image>().color =
+                        SlotColorHighlights.Gray;
+                }
+            }
+            item.transform.SetParent(dropParent);
+            item.GetComponent<RectTransform>().pivot = Vector2.zero;
+            item.transform.position = SlotGrid[_totalOffset.X, _totalOffset.Y].transform.position;
+            item.GetComponent<CanvasGroup>().alpha = 1f;
+            //overlay.UpdateOverlay(highlightedSlot.GetComponent<Slot>().storedItemClass);
         }
         
     }
