@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3983016716177584703}
   - component: {fileID: 90413572802008281}
   - component: {fileID: 5723207270709035758}
+  - component: {fileID: 6427713128730162715}
   m_Layer: 5
   m_Name: Quad 3
   m_TagString: Untagged
@@ -76,6 +77,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6427713128730162715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159217540585608787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1832699b91118d34c9c8014de2606385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotParent: {fileID: 8024092639817925013}
+  quadNum: 3
 --- !u!1 &5576766251523472990
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,6 +102,7 @@ GameObject:
   - component: {fileID: 1119210067957216025}
   - component: {fileID: 8945936126387635344}
   - component: {fileID: 4576005861074183937}
+  - component: {fileID: 6891461899257868884}
   m_Layer: 5
   m_Name: Quad 4
   m_TagString: Untagged
@@ -152,6 +168,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6891461899257868884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5576766251523472990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1832699b91118d34c9c8014de2606385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotParent: {fileID: 8024092639817925013}
+  quadNum: 4
 --- !u!1 &6824645118131534600
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +447,7 @@ GameObject:
   - component: {fileID: 8024092640954821543}
   - component: {fileID: 8024092640954821561}
   - component: {fileID: 8024092640954821560}
+  - component: {fileID: 7462867597414863412}
   m_Layer: 5
   m_Name: Quad 1
   m_TagString: Untagged
@@ -482,6 +513,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7462867597414863412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8024092640954821542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1832699b91118d34c9c8014de2606385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotParent: {fileID: 8024092639817925013}
+  quadNum: 1
 --- !u!1 &8166583667917389486
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,6 +538,7 @@ GameObject:
   - component: {fileID: 7908856664597558311}
   - component: {fileID: 12515969953999702}
   - component: {fileID: 2345105732625783297}
+  - component: {fileID: 5176041658463669134}
   m_Layer: 5
   m_Name: Quad 2
   m_TagString: Untagged
@@ -558,3 +604,17 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5176041658463669134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8166583667917389486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1832699b91118d34c9c8014de2606385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotParent: {fileID: 8024092639817925013}
+  quadNum: 2

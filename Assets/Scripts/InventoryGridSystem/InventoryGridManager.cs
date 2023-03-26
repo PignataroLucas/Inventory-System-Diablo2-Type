@@ -168,7 +168,7 @@ namespace InventoryGridSystem
                 }
             }
         }
-        private void ColorChangeLoop(Color32 color, IntVector2 size, IntVector2 startPos)
+        public void ColorChangeLoop(Color32 color, IntVector2 size, IntVector2 startPos)
         {
             for (int y = 0;  y < size.Y; y++)
             {
