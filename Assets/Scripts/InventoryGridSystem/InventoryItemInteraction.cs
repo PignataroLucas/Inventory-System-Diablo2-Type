@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Utility;
 using UnityEngine.UI;
+using Utility;
 
-namespace Item
+namespace InventoryGridSystem
 {
     public class InventoryItemInteraction : MonoBehaviour , IPointerClickHandler
     {

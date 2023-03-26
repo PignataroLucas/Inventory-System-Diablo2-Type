@@ -1,5 +1,3 @@
-using System;
-using Item;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Utility;
@@ -24,6 +22,7 @@ namespace InventoryGridSystem
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            Debug.Log("Entre");
             selector = this;
             _gridManager.highlightedSlot = slotParent;
             PossOffset();
@@ -70,6 +69,7 @@ namespace InventoryGridSystem
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            Debug.Log("Sali");
             selector = null;
             _gridManager.highlightedSlot = null;
             //overlay.UpdateOverlay(null); --IMPLEMENTAR--!!!!!!

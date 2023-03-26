@@ -1,3 +1,4 @@
+using InventoryGridSystem;
 using UnityEngine;
 using Utility;
 
