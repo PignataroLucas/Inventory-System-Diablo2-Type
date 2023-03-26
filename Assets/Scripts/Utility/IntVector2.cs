@@ -4,14 +4,12 @@ using UnityEngine;
 
 --This script defines an IntVector2 structure, which is a representation of a two-dimensional (2D) vector that uses 
   integers instead of floating point numbers as in Unity's Vector2 structure.--
-
-
-
-
 */
+
+
 namespace Utility
 {
-    
+    [System.Serializable]
     public struct IntVector2
     {
 

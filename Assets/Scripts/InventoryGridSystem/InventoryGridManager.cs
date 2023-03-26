@@ -62,8 +62,8 @@ namespace InventoryGridSystem
                 }
                 else if (highlightedSlot != null  && InventoryItemInteraction.selectedItem == null && highlightedSlot.GetComponent<Slots>().isOccupied == true)
                 {
-                    ColorChangeLoop(SlotColorHighlights.Gray , highlightedSlot.GetComponent<Slots>().StoredItemSize ,
-                                                             highlightedSlot.GetComponent<Slots>().StoredItemStartPos);
+                    ColorChangeLoop(SlotColorHighlights.Gray , highlightedSlot.GetComponent<Slots>().storedItemSize ,
+                                                             highlightedSlot.GetComponent<Slots>().storedItemStartPos);
                     InventoryItemInteraction.SetSelectableItem(GetItem(highlightedSlot));
                     //SlotSelector.selector.PosOffset();--IMPLEMENTAR!!!---
                     RefreshColor(true);
@@ -126,7 +126,7 @@ namespace InventoryGridSystem
                             if (obj == null)
                             {
                                 obj = slot.storedItemObject;
-                                _otherItemPos = slot.StoredItemStartPos;
+                                _otherItemPos = slot.storedItemStartPos;
                                 //_otherItemSize = obj.GetComponent<Item>().item.Size;
                             }
                             else if (obj != slot.storedItemObject) return 2;
@@ -211,8 +211,8 @@ namespace InventoryGridSystem
                     slot = SlotGrid[_totalOffset.X + x, _totalOffset.Y + y].GetComponent<Slots>();
                     slot.storedItemObject = item;
                     slot.storedItemClass = item.GetComponent<InventoryItemInteraction>().item;
-                    slot.StoredItemSize = itemSize;
-                    slot.StoredItemStartPos = _totalOffset;
+                    slot.storedItemSize = itemSize;
+                    slot.storedItemStartPos = _totalOffset;
                     slot.isOccupied = true;
                     SlotGrid[_totalOffset.X + x, _totalOffset.Y + y].GetComponent<Image>().color =
                         SlotColorHighlights.Gray;
@@ -228,7 +228,7 @@ namespace InventoryGridSystem
         {
             Slots slot = slotObject.GetComponent<Slots>();
             GameObject item = slot.storedItemObject;
-            IntVector2 tempItemPos = slot.StoredItemStartPos;
+            IntVector2 tempItemPos = slot.storedItemStartPos;
             IntVector2 itemSize = item.GetComponent<InventoryItemInteraction>().item.size;
 
             Slots slotInstance;
@@ -239,8 +239,8 @@ namespace InventoryGridSystem
                 {
                     slotInstance = SlotGrid[tempItemPos.X + x, tempItemPos.Y + y].GetComponent<Slots>();
                     slotInstance.storedItemObject = null;
-                    slotInstance.StoredItemSize = IntVector2.Zero;
-                    slotInstance.StoredItemStartPos = IntVector2.Zero;
+                    slotInstance.storedItemSize = IntVector2.Zero;
+                    slotInstance.storedItemStartPos = IntVector2.Zero;
                     slotInstance.storedItemClass = null;
                     slotInstance.isOccupied = false;
                 }

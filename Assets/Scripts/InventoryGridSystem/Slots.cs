@@ -1,5 +1,6 @@
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Serialization;
 using Utility;
 
 namespace InventoryGridSystem
@@ -7,11 +8,11 @@ namespace InventoryGridSystem
     public class Slots : MonoBehaviour
     {
         public IntVector2 GridPos;
-        public Text text;
+        public TMP_Text text;
 
         public GameObject storedItemObject;
-        public IntVector2 StoredItemSize;
-        public IntVector2 StoredItemStartPos;
+        [FormerlySerializedAs("StoredItemSize")] public IntVector2 storedItemSize;
+        [FormerlySerializedAs("StoredItemStartPos")] public IntVector2 storedItemStartPos;
         public GameItem storedItemClass;
         public bool isOccupied;
 
