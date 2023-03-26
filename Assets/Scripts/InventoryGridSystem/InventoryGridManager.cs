@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Net.Mime;
+using Item;
 using UnityEditor;
 using UnityEditor.Overlays;
 using UnityEngine;
@@ -28,7 +29,7 @@ namespace InventoryGridSystem
         private int _checkState;
         private bool _isOverEdge;
         
-        //public ItemOverlay overlay;
+        //public ItemOverlay overlay; IMPLEMENTAR!!!!!
 
         private void Start()
         {
@@ -39,32 +40,33 @@ namespace InventoryGridSystem
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (highlightedSlot != null /*&& /*Item.selectedItem != null*/ && !_isOverEdge )
+                if (highlightedSlot != null && InventoryItemInteraction.selectedItem != null && !_isOverEdge )
                 {
                     switch (_checkState)
                     {
                         case 0 :
-                            //StoreItem(Item.selectedItem);
-                            //ColorChangeLoop(SlotColorHighlights.blue , Item.selectedItemSize , _totalOffset)
-                            //Item.ResetSelectedItem();
+                            StoreItem(InventoryItemInteraction.selectedItem);
+                            ColorChangeLoop(SlotColorHighlights.Blue, InventoryItemInteraction.selectedItemSize,
+                                _totalOffset);
+                            InventoryItemInteraction.ResetSelectedItem();
                             //RemoveSelectedButton();
-                        break;
+                            break;
                         case 1 :
-                            //Item.SetSelectedItem(Swap(Item.selectedItem));
-                            //SlotSelector.selector.PosOffset();
-                            //ColorChangeLoop(SlotColorHighlights.Gray , _otherItemSize , _otherItemPos);
-                            //RefreshColor(true);
-                            //RemoveSelectedButton();
+                            InventoryItemInteraction.SetSelectableItem(SwapItem(InventoryItemInteraction.selectedItem));
+                            //SlotSelector.selector.PosOffset(); --IMPLEMENTAR!!--
+                            ColorChangeLoop(SlotColorHighlights.Gray , _otherItemSize , _otherItemPos);
+                            RefreshColor(true);
+                            //RemoveSelectedButton();--IMPLEMENTAR!!--
                             break;
                     }
                 }
-                else if (highlightedSlot != null /* && Item.selectedItem == null*/ && highlightedSlot.GetComponent<Slots>().isOccupied == true)
+                else if (highlightedSlot != null  && InventoryItemInteraction.selectedItem == null && highlightedSlot.GetComponent<Slots>().isOccupied == true)
                 {
-                    //ColorChangeLoop(SlotColorHighlights.Gray , highlightedSlot.GetComponent<Slot>().storedItemSize ,
-                    //                                         highlightedSlot.GetComponent<Slot>().storedItemStartPos);
-                    //Item.SetSelectedItem(GetItem(highlightedSlot));
-                    //SlotSelector.selector.PosOffset();
-                    //RefreshColor(true);
+                    ColorChangeLoop(SlotColorHighlights.Gray , highlightedSlot.GetComponent<Slots>().StoredItemSize ,
+                                                             highlightedSlot.GetComponent<Slots>().StoredItemStartPos);
+                    InventoryItemInteraction.SetSelectableItem(GetItem(highlightedSlot));
+                    //SlotSelector.selector.PosOffset();--IMPLEMENTAR!!!---
+                    RefreshColor(true);
                 }
             }
         }
@@ -201,14 +203,14 @@ namespace InventoryGridSystem
         private void StoreItem(GameObject item)
         {
             Slots slot;
-            IntVector2 itemSize = item.GetComponent<Item>().item.Size;
+            IntVector2 itemSize = item.GetComponent<InventoryItemInteraction>().item.size;
             for (int y = 0; y < itemSize.Y; y++)
             {
                 for (int x = 0; x < itemSize.X; x++)
                 {
                     slot = SlotGrid[_totalOffset.X + x, _totalOffset.Y + y].GetComponent<Slots>();
                     slot.storedItemObject = item;
-                    slot.storedItemClass = item.GetComponent<Item>().item;
+                    slot.storedItemClass = item.GetComponent<InventoryItemInteraction>().item;
                     slot.StoredItemSize = itemSize;
                     slot.StoredItemStartPos = _totalOffset;
                     slot.isOccupied = true;
@@ -222,6 +224,52 @@ namespace InventoryGridSystem
             item.GetComponent<CanvasGroup>().alpha = 1f;
             //overlay.UpdateOverlay(highlightedSlot.GetComponent<Slot>().storedItemClass);
         }
+        private GameObject GetItem(GameObject slotObject)
+        {
+            Slots slot = slotObject.GetComponent<Slots>();
+            GameObject item = slot.storedItemObject;
+            IntVector2 tempItemPos = slot.StoredItemStartPos;
+            IntVector2 itemSize = item.GetComponent<InventoryItemInteraction>().item.size;
+
+            Slots slotInstance;
+
+            for (int y = 0; y < itemSize.Y; y++)
+            {
+                for (int x = 0; x < itemSize.X; x++)
+                {
+                    slotInstance = SlotGrid[tempItemPos.X + x, tempItemPos.Y + y].GetComponent<Slots>();
+                    slotInstance.storedItemObject = null;
+                    slotInstance.StoredItemSize = IntVector2.Zero;
+                    slotInstance.StoredItemStartPos = IntVector2.Zero;
+                    slotInstance.storedItemClass = null;
+                    slotInstance.isOccupied = false;
+                }
+            }
+            item.GetComponent<RectTransform>().pivot = new Vector2(.5f, .5f);
+            item.GetComponent<CanvasGroup>().alpha = .5f;
+            item.transform.position = Input.mousePosition;
+            //overlayScript.UpdateOverlay(null);
+            return item;
+        }
+
+        private GameObject SwapItem(GameObject item)
+        {
+            GameObject tempItem;
+            tempItem = GetItem(SlotGrid[_otherItemPos.X, _otherItemPos.Y]);
+            StoreItem(item);
+            return tempItem;
+        }
+
+        /*public void RemoveSelectedButton() -------IMPLEMENTAR!!!!!!-------
+        {
+            if (selectedButton != null)
+            {
+                listManager.RemoveItemFromList(selectedButton.GetComponent<ItemButtonScript>().item);
+                listManager.RemoveButton(selectedButton);
+                listManager.sortManager.SortAndFilterList();
+                selectedButton = null;
+            }
+        }*/
         
     }
 }

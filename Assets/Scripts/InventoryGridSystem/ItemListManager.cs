@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace InventoryGridSystem
 {
-    
+    //IMPLEMENTAR!!!!!---
     public class ItemListManager : MonoBehaviour
     {
         //public ObjectPool itemButtonPool;

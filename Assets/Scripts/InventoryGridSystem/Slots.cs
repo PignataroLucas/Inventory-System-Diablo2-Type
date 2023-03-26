@@ -12,7 +12,7 @@ namespace InventoryGridSystem
         public GameObject storedItemObject;
         public IntVector2 StoredItemSize;
         public IntVector2 StoredItemStartPos;
-        //public ItemClass storedItemClass;
+        public GameItem storedItemClass;
         public bool isOccupied;
 
         public Slots(IntVector2 gridPos)
