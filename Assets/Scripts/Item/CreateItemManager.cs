@@ -1,11 +1,12 @@
 using UnityEngine;
+using Utility;
 
 namespace Item
 {
     public class CreateItemManager : MonoBehaviour
     {
         public bool willAddToList = false;
-        
+        public ObjectPoolManager poolManager;
 
 
         public void RandomItem()
@@ -21,8 +22,15 @@ namespace Item
         {
             if (willAddToList == false)
             {
-                //IMPLEMENTAR!!!!!!---
-                //GameObject itemObject = itemEquipPool.GetObject();
+                GameObject itemObject = poolManager.GetObject();
+                itemObject.GetComponent<InventoryItemInteraction>().SetItemObject(item);
+                InventoryItemInteraction.SetSelectableItem(itemObject);
+            }
+            else
+            {
+                //IMPLEMENTAR!!!!
+                
+                Debug.LogWarning("Item Added to List");
             }
         }
         
