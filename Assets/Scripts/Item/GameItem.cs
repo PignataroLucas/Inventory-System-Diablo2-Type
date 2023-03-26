@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DataBase;
 using UnityEngine;
 using Utility;
 
@@ -33,12 +34,12 @@ public class GameItem
         item.globalID = id;
         item.level = lvl;
         item.qualityInt = quality;
-        //GameObject.FindGameObjectWithTag("ItemDatabase").GetComponent<ItemDataBase>().PassItemData(ref item);
+        GameObject.FindGameObjectWithTag("ItemDatabase").GetComponent<ItemDatabaseLoader>().PassItemData(ref item);
     }
 
     public static void SetItemValues(GameItem item)
     {
-        //GameObject.FindGameObjectWithTag("ItemDatabase").GetComponent<ItemDataBase>().PassItemData(ref item);
+        GameObject.FindGameObjectWithTag("ItemDatabase").GetComponent<ItemDatabaseLoader>().PassItemData(ref item);
     }
 
     public GameItem(GameItem passedItem)
