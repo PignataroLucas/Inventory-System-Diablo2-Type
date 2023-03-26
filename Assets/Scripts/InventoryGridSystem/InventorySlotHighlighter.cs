@@ -34,7 +34,7 @@ namespace InventoryGridSystem
             //if (_parentSlot.storedItemObject != null) overlay.UpdateOverlay(parentSlot.storedItem); ---IMPLEMENTAR!!!---
         }
 
-        private void PossOffset()
+        public void PossOffset()
         {
             if (InventoryItemInteraction.selectedItemSize.X != 0 &&
                 InventoryItemInteraction.selectedItemSize.X % 2 == 0)

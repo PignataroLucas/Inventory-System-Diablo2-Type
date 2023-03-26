@@ -19,7 +19,7 @@ namespace Item
 
         private void Awake()
         {
-            //_slotSize = GameObject.FindGameObjectWithTag<"InventoryPanel">.GetComponent<InventoryGrid>().slotSize;
+            _slotSize = GameObject.FindGameObjectWithTag("InvenPanel").GetComponent<InventoryGridCreator>().slotSize;
         }
 
         private void Update()

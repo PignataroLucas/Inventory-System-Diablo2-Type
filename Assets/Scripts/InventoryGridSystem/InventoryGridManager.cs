@@ -1,11 +1,5 @@
-using System;
-using System.Drawing;
-using System.Net.Mime;
 using Item;
-using UnityEditor;
-using UnityEditor.Overlays;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Utility;
 
@@ -53,7 +47,7 @@ namespace InventoryGridSystem
                             break;
                         case 1 :
                             InventoryItemInteraction.SetSelectableItem(SwapItem(InventoryItemInteraction.selectedItem));
-                            //SlotSelector.selector.PosOffset(); --IMPLEMENTAR!!--
+                            InventorySlotHighlighter.selector.PossOffset();
                             ColorChangeLoop(SlotColorHighlights.Gray , _otherItemSize , _otherItemPos);
                             RefreshColor(true);
                             //RemoveSelectedButton();--IMPLEMENTAR!!--
@@ -65,7 +59,7 @@ namespace InventoryGridSystem
                     ColorChangeLoop(SlotColorHighlights.Gray , highlightedSlot.GetComponent<Slots>().storedItemSize ,
                                                              highlightedSlot.GetComponent<Slots>().storedItemStartPos);
                     InventoryItemInteraction.SetSelectableItem(GetItem(highlightedSlot));
-                    //SlotSelector.selector.PosOffset();--IMPLEMENTAR!!!---
+                    InventorySlotHighlighter.selector.PossOffset();
                     RefreshColor(true);
                 }
             }
@@ -80,7 +74,7 @@ namespace InventoryGridSystem
             halfOffset.X = (itemSize.X - (itemSize.X % 2 == 0 ? 0 : 1)) / 2;
             halfOffset.Y = (itemSize.Y - (itemSize.Y % 2 == 0 ? 0 : 1)) / 2;
             
-            _totalOffset = highlightedSlot.GetComponent<Slots>().GridPos - (halfOffset /* SlotSelector.posOffset*/);
+            _totalOffset = highlightedSlot.GetComponent<Slots>().GridPos - (halfOffset + InventorySlotHighlighter.posOffset);
             _checkStartPos = _totalOffset;
             _checkSize = itemSize;
             overCheck = _totalOffset + itemSize;
@@ -127,7 +121,7 @@ namespace InventoryGridSystem
                             {
                                 obj = slot.storedItemObject;
                                 _otherItemPos = slot.storedItemStartPos;
-                                //_otherItemSize = obj.GetComponent<Item>().item.Size;
+                                _otherItemSize = obj.GetComponent<InventoryItemInteraction>().item.size;
                             }
                             else if (obj != slot.storedItemObject) return 2;
                         }
@@ -143,7 +137,7 @@ namespace InventoryGridSystem
         {
             if (enter)
             {
-                //CheckArea(Item.selectedItemSize);
+                CheckArea(InventoryItemInteraction.selectedItemSize);
                 _checkState = SlotCheck(_checkSize);
                 switch (_checkState)
                 {
@@ -222,7 +216,7 @@ namespace InventoryGridSystem
             item.GetComponent<RectTransform>().pivot = Vector2.zero;
             item.transform.position = SlotGrid[_totalOffset.X, _totalOffset.Y].transform.position;
             item.GetComponent<CanvasGroup>().alpha = 1f;
-            //overlay.UpdateOverlay(highlightedSlot.GetComponent<Slot>().storedItemClass);
+            //overlay.UpdateOverlay(highlightedSlot.GetComponent<Slot>().storedItemClass); IMPLEMENTAR!!!!!!
         }
         private GameObject GetItem(GameObject slotObject)
         {
