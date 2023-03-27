@@ -5,7 +5,7 @@ using Utility;
 
 namespace InventoryGridSystem
 {
-    public class InventoryItemInteraction : MonoBehaviour , IPointerClickHandler
+    public class InventoryItemInteraction : MonoBehaviour 
     {
 
         private GameObject _inventoryPanel;
@@ -30,17 +30,12 @@ namespace InventoryGridSystem
         public void SetItemObject(GameItem passedItem)
         {
             RectTransform rectTransform = GetComponent<RectTransform>();
-            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal , passedItem.size.X * _slotSize);
-            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical , passedItem.size.Y * _slotSize);
+            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal , passedItem.size.x * _slotSize);
+            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical , passedItem.size.y * _slotSize);
             item = passedItem;
             GetComponent<Image>().sprite = passedItem.icon;
         }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            
-        }
-
+        
         public static void SetSelectableItem(GameObject obj)
         {
             selectedItem = obj;

@@ -1,6 +1,8 @@
+using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Utility;
 
 namespace InventoryGridSystem
@@ -8,7 +10,8 @@ namespace InventoryGridSystem
     public class Slots : MonoBehaviour
     {
         public IntVector2 GridPos;
-        public TMP_Text text;
+        //public TMP_Text text;
+        public Text text;
 
         public GameObject storedItemObject;
         [FormerlySerializedAs("StoredItemSize")] public IntVector2 storedItemSize;
@@ -23,7 +26,7 @@ namespace InventoryGridSystem
 
         private void Start()
         {
-            text.text = GridPos.X + "," + GridPos.Y;
+            text.text = GridPos.x + "," + GridPos.y;
         }
     }
 }

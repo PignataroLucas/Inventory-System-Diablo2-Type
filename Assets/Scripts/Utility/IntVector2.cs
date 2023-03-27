@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /*
 
@@ -9,39 +10,35 @@ using UnityEngine;
 
 namespace Utility
 {
-    [System.Serializable]
+    [System.Serializable] 
     public struct IntVector2
     {
+        public int x, y;
 
-        public int X,Y;
-
-        public IntVector2(int x, int y)
+        public IntVector2(int num1, int num2)
         {
-            X = x;
-            Y = y;
+            x = num1;
+            y = num2;
         }
-
-        public IntVector2(float x, float y)
+        public IntVector2(float num1, float num2)
         {
-            X = (int)x;
-            Y = (int)y;
+            x = (int)num1;
+            y = (int)num2;
         }
-
-        public IntVector2(Vector2 n)
+        public IntVector2(Vector2 a)
         {
-
-            X = (int)n.x;
-            Y = (int)n.y;
+            x = (int)a.x;
+            y = (int)a.y;
         }
 
         public override string ToString()
         {
-            return ("(" + X + ", " + Y + ")");
+            return ("(" + x + ", " + y + ")");
         }
-        
+
         public static IntVector2 One
         {
-        get { return new IntVector2(1, 1); }
+            get { return new IntVector2(1, 1); }
         }
         public static IntVector2 OneNeg
         {
@@ -69,53 +66,53 @@ namespace Utility
         }
         public static IntVector2 operator +(IntVector2 a, IntVector2 b)
         {
-            return new IntVector2(a.X + b.X, a.X + b.Y);
+            return new IntVector2(a.x + b.x, a.y + b.y);
         }
         public static IntVector2 operator +(IntVector2 a, int b)
         {
-            return new IntVector2(a.X + b, a.Y + b);
+            return new IntVector2(a.x + b, a.y + b);
         }
         public static IntVector2 operator -(IntVector2 a, IntVector2 b)
         {
-            return new IntVector2(a.X - b.X, a.Y - b.Y);
+            return new IntVector2(a.x - b.x, a.y - b.y);
         }
         public static IntVector2 operator -(IntVector2 a, int b)
         {
-            return new IntVector2(a.X - b, a.Y - b);
+            return new IntVector2(a.x - b, a.y - b);
         }
         public static IntVector2 operator *(IntVector2 a, int b)
         {
-            return new IntVector2(a.X * b, a.Y * b);
+            return new IntVector2(a.x * b, a.y * b);
         }
         public static IntVector2 operator /(IntVector2 a, int b)
         {
-            return new IntVector2(a.X / b, a.Y / b);
+            return new IntVector2(a.x / b, a.y / b);
         }
         public static int Area(IntVector2 a)
         {
-            return (a.X * a.Y);
+            return (a.x * a.y);
         }
         public static float Slope(IntVector2 a)
         {
-            return ((float)a.Y / (float)a.X);
+            return ((float)a.y / (float)a.x);
         }
         public static void Swap(ref IntVector2 a)
         {
-            int temp = a.X;
-            a.X = a.Y;
-            a.Y = temp;
+            int temp = a.x;
+            a.x = a.y;
+            a.y = temp;
         }
         public static Vector2 Vector2(IntVector2 a)
         {
-            return new Vector2(a.X, a.X);
+            return new Vector2(a.x, a.y);
         }
         public static Vector3 Vector3(IntVector2 a)
         {
-            return new Vector3(a.X, a.Y);
+            return new Vector3(a.x, a.y);
         }
         public static bool operator ==(IntVector2 a, IntVector2 b)
         {
-            if ((a.X == b.X) && (a.Y == b.Y))
+            if ((a.x == b.x) && (a.y == b.y))
             {
                 return true;
             }
@@ -126,7 +123,7 @@ namespace Utility
         }
         public static bool operator !=(IntVector2 a, IntVector2 b)
         {
-            if ((a.X != b.X) || (a.Y != b.Y))
+            if ((a.x != b.x) || (a.y != b.y))
             {
                 return true;
             }
@@ -137,7 +134,7 @@ namespace Utility
         }
         public static bool OrGreater(IntVector2 a, IntVector2 b)
         {
-            if (a.X > b.X || a.Y > b.Y)
+            if (a.x > b.x || a.y > b.y)
             {
                 return true;
             }
@@ -145,7 +142,7 @@ namespace Utility
         }
         public static bool OrGreater(IntVector2 a, int b)
         {
-            if (a.X > b || a.Y > b)
+            if (a.x > b || a.y > b)
             {
                 return true;
             }
@@ -153,7 +150,7 @@ namespace Utility
         }
         public static bool OrLesser(IntVector2 a, IntVector2 b)
         {
-            if (a.X < b.X || a.Y < b.Y)
+            if (a.x < b.x || a.y < b.y)
             {
                 return true;
             }
@@ -161,7 +158,7 @@ namespace Utility
         }
         public static bool OrLesser(IntVector2 a, int b)
         {
-            if (a.X < b || a.Y < b)
+            if (a.x < b || a.y < b)
             {
                 return true;
             }
@@ -176,4 +173,5 @@ namespace Utility
             return 0;
         }
     }
+    
 }

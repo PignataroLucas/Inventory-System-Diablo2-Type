@@ -15,7 +15,7 @@ namespace Item
             if (InventoryItemInteraction.selectedItem == null)
             {
                 GameItem newItem = new GameItem();
-                GameItem.SetItemValues(newItem,Random.Range(0,5),Random.Range(1,101),Random.Range(1,5));
+                GameItem.SetItemValues(newItem,Random.Range(0,4),Random.Range(1,101),Random.Range(1,5));
                 SpawnOrAddItem(newItem);
             }    
         }

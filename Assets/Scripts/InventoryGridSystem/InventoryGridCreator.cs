@@ -15,7 +15,7 @@ using Utility;
 
         private void Awake()
         {
-            slotGrid = new GameObject[gridSize.X, gridSize.Y];
+            slotGrid = new GameObject[gridSize.x, gridSize.y];
             ResizePanel();
             CreateSlots();
             GetComponent<InventoryGridManager>().GridSize = gridSize;
@@ -23,9 +23,9 @@ using Utility;
 
         private void CreateSlots()
         {
-            for (int y = 0; y < gridSize.Y; y++)
+            for (int y = 0; y < gridSize.y; y++)
             {
-                for (int x = 0; x < gridSize.X; x++)
+                for (int x = 0; x < gridSize.x; x++)
                 {
                     GameObject obj = Instantiate(slotPrefab);
                     
@@ -47,8 +47,8 @@ using Utility;
         private void ResizePanel()
         {
             float width, height;
-            width = (gridSize.X * slotSize) + (edgePadding * 2);
-            height = (gridSize.Y * slotSize) + (edgePadding * 2);
+            width = (gridSize.x * slotSize) + (edgePadding * 2);
+            height = (gridSize.y * slotSize) + (edgePadding * 2);
 
             RectTransform rectTransform = GetComponent<RectTransform>();
             rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,width);

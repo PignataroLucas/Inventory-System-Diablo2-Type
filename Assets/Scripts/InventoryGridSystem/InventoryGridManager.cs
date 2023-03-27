@@ -71,8 +71,8 @@ namespace InventoryGridSystem
             IntVector2 halfOffset;
             IntVector2 overCheck;
 
-            halfOffset.X = (itemSize.X - (itemSize.X % 2 == 0 ? 0 : 1)) / 2;
-            halfOffset.Y = (itemSize.Y - (itemSize.Y % 2 == 0 ? 0 : 1)) / 2;
+            halfOffset.x = (itemSize.x - (itemSize.x % 2 == 0 ? 0 : 1)) / 2;
+            halfOffset.y = (itemSize.y - (itemSize.y % 2 == 0 ? 0 : 1)) / 2;
             
             _totalOffset = highlightedSlot.GetComponent<Slots>().GridPos - (halfOffset + InventorySlotHighlighter.posOffset);
             _checkStartPos = _totalOffset;
@@ -80,26 +80,26 @@ namespace InventoryGridSystem
             overCheck = _totalOffset + itemSize;
             _isOverEdge = false;
 
-            if (overCheck.X > GridSize.X)
+            if (overCheck.x > GridSize.x)
             {
-                _checkSize.X = GridSize.X - _totalOffset.X;
+                _checkSize.x = GridSize.x - _totalOffset.x;
                 _isOverEdge = true;
             }
-            if (_totalOffset.X < 0)
+            if (_totalOffset.x < 0)
             {
-                _checkSize.X = itemSize.X + _totalOffset.X;
-                _checkStartPos.X = 0;
+                _checkSize.x = itemSize.x + _totalOffset.x;
+                _checkStartPos.x = 0;
                 _isOverEdge = true;
             }
-            if (overCheck.Y > GridSize.Y)
+            if (overCheck.y > GridSize.y)
             {
-                _checkSize.Y = GridSize.Y - _totalOffset.Y;
+                _checkSize.y = GridSize.y - _totalOffset.y;
                 _isOverEdge = true;
             }
-            if (_totalOffset.Y < 0)
+            if (_totalOffset.y < 0)
             {
-                _checkSize.Y = itemSize.Y + _totalOffset.Y;
-                _checkStartPos.Y = 0;
+                _checkSize.y = itemSize.y + _totalOffset.y;
+                _checkStartPos.y = 0;
                 _isOverEdge = true;
             }
         }
@@ -110,11 +110,11 @@ namespace InventoryGridSystem
             Slots slot;
             if (!_isOverEdge)
             {
-                for (int y = 0; y < itemSize.Y; y++)
+                for (int y = 0; y < itemSize.y; y++)
                 {
-                    for (int x = 0; x < itemSize.X; x++)
+                    for (int x = 0; x < itemSize.x; x++)
                     {
-                        slot = SlotGrid[_checkStartPos.X + x, _checkStartPos.Y + y].GetComponent<Slots>();
+                        slot = SlotGrid[_checkStartPos.x + x, _checkStartPos.y + y].GetComponent<Slots>();
                         if (slot.isOccupied)
                         {
                             if (obj == null)
@@ -141,20 +141,18 @@ namespace InventoryGridSystem
                 _checkState = SlotCheck(_checkSize);
                 switch (_checkState)
                 {
-                    case 0 : ColorChangeLoop(SlotColorHighlights.Green, _checkSize, _checkStartPos);
-                        break;
+                    case 0 : ColorChangeLoop(SlotColorHighlights.Green, _checkSize, _checkStartPos);break;
                     case 1 :
                         ColorChangeLoop(SlotColorHighlights.Yellow, _otherItemSize, _otherItemPos);
                         ColorChangeLoop(SlotColorHighlights.Green, _checkSize, _checkStartPos);
                         break;
-                    case 2 : ColorChangeLoop(SlotColorHighlights.Red, _checkSize, _checkStartPos); 
-                        break;
+                    case 2 : ColorChangeLoop(SlotColorHighlights.Red, _checkSize, _checkStartPos); break;
                 }
             }
             else
             {
                 _isOverEdge = false;
-                //CheckArea();
+                //CheckArea(InventoryItemInteraction.selectedItemSize);
                 SecondColorChangeLoop(_checkSize, _checkStartPos);
                 if (_checkState == 1)
                 {
@@ -164,30 +162,30 @@ namespace InventoryGridSystem
         }
         public void ColorChangeLoop(Color32 color, IntVector2 size, IntVector2 startPos)
         {
-            for (int y = 0;  y < size.Y; y++)
+            for (int y = 0;  y < size.y; y++)
             {
-                for (int x = 0; x < size.X ; x++)
+                for (int x = 0; x < size.x ; x++)
                 {
-                    SlotGrid[startPos.X + x, startPos.Y + y].GetComponent<Image>().color = color;
+                    SlotGrid[startPos.x + x, startPos.y + y].GetComponent<Image>().color = color;
                 }
             }
         }
         private void SecondColorChangeLoop(IntVector2 size, IntVector2 startPos)
         {
             GameObject slot;
-            for (int y = 0; y < size.Y; y++)
+            for (int y = 0; y < size.y; y++)
             {
-                for (int x = 0; x < size.X; x++)
+                for (int x = 0; x < size.x; x++)
                 {
-                    slot = SlotGrid[startPos.X + x, startPos.Y + y];
+                    slot = SlotGrid[startPos.x + x, startPos.y + y];
                     if (slot.GetComponent<Slots>().isOccupied != false)
                     {
-                        SlotGrid[startPos.X + x, startPos.Y + y].GetComponent<Image>().color =
+                        SlotGrid[startPos.x + x, startPos.y + y].GetComponent<Image>().color =
                             SlotColorHighlights.Blue2;
                     }
                     else
                     {
-                        SlotGrid[startPos.X + x, startPos.Y + y].GetComponent<Image>().color =
+                        SlotGrid[startPos.x + x, startPos.y + y].GetComponent<Image>().color =
                             SlotColorHighlights.Gray;
                     }
                 }
@@ -198,23 +196,23 @@ namespace InventoryGridSystem
         {
             Slots slot;
             IntVector2 itemSize = item.GetComponent<InventoryItemInteraction>().item.size;
-            for (int y = 0; y < itemSize.Y; y++)
+            for (int y = 0; y < itemSize.y; y++)
             {
-                for (int x = 0; x < itemSize.X; x++)
+                for (int x = 0; x < itemSize.x; x++)
                 {
-                    slot = SlotGrid[_totalOffset.X + x, _totalOffset.Y + y].GetComponent<Slots>();
+                    slot = SlotGrid[_totalOffset.x + x, _totalOffset.y + y].GetComponent<Slots>();
                     slot.storedItemObject = item;
                     slot.storedItemClass = item.GetComponent<InventoryItemInteraction>().item;
                     slot.storedItemSize = itemSize;
                     slot.storedItemStartPos = _totalOffset;
                     slot.isOccupied = true;
-                    SlotGrid[_totalOffset.X + x, _totalOffset.Y + y].GetComponent<Image>().color =
+                    SlotGrid[_totalOffset.x + x, _totalOffset.y + y].GetComponent<Image>().color =
                         SlotColorHighlights.Gray;
                 }
             }
             item.transform.SetParent(dropParent);
             item.GetComponent<RectTransform>().pivot = Vector2.zero;
-            item.transform.position = SlotGrid[_totalOffset.X, _totalOffset.Y].transform.position;
+            item.transform.position = SlotGrid[_totalOffset.x, _totalOffset.y].transform.position;
             item.GetComponent<CanvasGroup>().alpha = 1f;
             //overlay.UpdateOverlay(highlightedSlot.GetComponent<Slot>().storedItemClass); IMPLEMENTAR!!!!!!
         }
@@ -227,11 +225,11 @@ namespace InventoryGridSystem
 
             Slots slotInstance;
 
-            for (int y = 0; y < itemSize.Y; y++)
+            for (int y = 0; y < itemSize.y; y++)
             {
-                for (int x = 0; x < itemSize.X; x++)
+                for (int x = 0; x < itemSize.x; x++)
                 {
-                    slotInstance = SlotGrid[tempItemPos.X + x, tempItemPos.Y + y].GetComponent<Slots>();
+                    slotInstance = SlotGrid[tempItemPos.x + x, tempItemPos.y + y].GetComponent<Slots>();
                     slotInstance.storedItemObject = null;
                     slotInstance.storedItemSize = IntVector2.Zero;
                     slotInstance.storedItemStartPos = IntVector2.Zero;
@@ -249,7 +247,7 @@ namespace InventoryGridSystem
         private GameObject SwapItem(GameObject item)
         {
             GameObject tempItem;
-            tempItem = GetItem(SlotGrid[_otherItemPos.X, _otherItemPos.Y]);
+            tempItem = GetItem(SlotGrid[_otherItemPos.x, _otherItemPos.y]);
             StoreItem(item);
             return tempItem;
         }

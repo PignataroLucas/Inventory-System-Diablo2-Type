@@ -22,7 +22,6 @@ namespace InventoryGridSystem
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log("Entre");
             selector = this;
             _gridManager.highlightedSlot = slotParent;
             PossOffset();
@@ -35,41 +34,42 @@ namespace InventoryGridSystem
 
         public void PossOffset()
         {
-            if (InventoryItemInteraction.selectedItemSize.X != 0 &&
-                InventoryItemInteraction.selectedItemSize.X % 2 == 0)
+            if (InventoryItemInteraction.selectedItemSize.x != 0 &&
+                InventoryItemInteraction.selectedItemSize.x % 2 == 0)
             {
+                
                 switch (quadNum)
                 {
                     case 1:
-                        posOffset.X = 0; break;
+                        posOffset.x = 0; break;
                     case 2:
-                        posOffset.X = -1; break;
+                        posOffset.x = -1; break;
                     case 3:
-                        posOffset.X = 0; break;
+                        posOffset.x = 0; break;
                     case 4:
-                        posOffset.X = -1; break;
+                        posOffset.x = -1; break;
                 }
             }
-            if (InventoryItemInteraction.selectedItemSize.Y != 0 
-                && InventoryItemInteraction.selectedItemSize.Y % 2 == 0)
+            if (InventoryItemInteraction.selectedItemSize.y != 0 
+                && InventoryItemInteraction.selectedItemSize.y % 2 == 0)
             {
+               
                 switch (quadNum)
                 {
                     case 1:
-                        posOffset.Y = -1; break;
+                        posOffset.y = -1; break;
                     case 2:
-                        posOffset.Y = -1; break;
+                        posOffset.y = -1; break;
                     case 3:
-                        posOffset.Y = 0; break;
+                        posOffset.y = 0; break;
                     case 4:
-                        posOffset.Y = 0; break;
+                        posOffset.y = 0; break;
                 }
             }
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            Debug.Log("Sali");
             selector = null;
             _gridManager.highlightedSlot = null;
             //overlay.UpdateOverlay(null); --IMPLEMENTAR--!!!!!!
