@@ -7,7 +7,6 @@ namespace InventoryGridSystem
 {
     public class InventoryGridManager : MonoBehaviour
     {
-
         public GameObject[,] SlotGrid;
         public GameObject highlightedSlot;
         public Transform dropParent;
@@ -15,7 +14,7 @@ namespace InventoryGridSystem
         [HideInInspector] public IntVector2 GridSize;
         
         public ItemListManager listManager;
-        public GameObject selectedButton;
+        
 
         private IntVector2 _totalOffset, _checkSize, _checkStartPos;
         private IntVector2 _otherItemPos, _otherItemSize;
@@ -23,13 +22,6 @@ namespace InventoryGridSystem
         private int _checkState;
         private bool _isOverEdge;
         
-        //public ItemOverlay overlay; IMPLEMENTAR!!!!!
-
-        private void Start()
-        {
-            //ItemButton.iventoryManager = this;
-        }
-
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
@@ -43,14 +35,14 @@ namespace InventoryGridSystem
                             ColorChangeLoop(SlotColorHighlights.Blue, InventoryItemInteraction.selectedItemSize,
                                 _totalOffset);
                             InventoryItemInteraction.ResetSelectedItem();
-                            //RemoveSelectedButton();
+                            
                             break;
                         case 1 :
                             InventoryItemInteraction.SetSelectableItem(SwapItem(InventoryItemInteraction.selectedItem));
                             InventorySlotHighlighter.selector.PossOffset();
                             ColorChangeLoop(SlotColorHighlights.Gray , _otherItemSize , _otherItemPos);
                             RefreshColor(true);
-                            //RemoveSelectedButton();--IMPLEMENTAR!!--
+                            
                             break;
                     }
                 }
@@ -214,7 +206,7 @@ namespace InventoryGridSystem
             item.GetComponent<RectTransform>().pivot = Vector2.zero;
             item.transform.position = SlotGrid[_totalOffset.x, _totalOffset.y].transform.position;
             item.GetComponent<CanvasGroup>().alpha = 1f;
-            //overlay.UpdateOverlay(highlightedSlot.GetComponent<Slot>().storedItemClass); IMPLEMENTAR!!!!!!
+            
         }
         private GameObject GetItem(GameObject slotObject)
         {
@@ -240,7 +232,7 @@ namespace InventoryGridSystem
             item.GetComponent<RectTransform>().pivot = new Vector2(.5f, .5f);
             item.GetComponent<CanvasGroup>().alpha = .5f;
             item.transform.position = Input.mousePosition;
-            //overlayScript.UpdateOverlay(null);
+            
             return item;
         }
 
@@ -252,16 +244,7 @@ namespace InventoryGridSystem
             return tempItem;
         }
 
-        /*public void RemoveSelectedButton() -------IMPLEMENTAR!!!!!!-------
-        {
-            if (selectedButton != null)
-            {
-                listManager.RemoveItemFromList(selectedButton.GetComponent<ItemButtonScript>().item);
-                listManager.RemoveButton(selectedButton);
-                listManager.sortManager.SortAndFilterList();
-                selectedButton = null;
-            }
-        }*/
+       
         
     }
 }

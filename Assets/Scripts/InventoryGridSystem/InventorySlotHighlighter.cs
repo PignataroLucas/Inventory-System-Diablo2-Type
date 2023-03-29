@@ -9,8 +9,8 @@ namespace InventoryGridSystem
         public GameObject slotParent;
         public static IntVector2 posOffset;
         public static InventorySlotHighlighter selector;
-        //public static ItemOverlay overlay; ---IMPLEMENTAR!!!---
         public int quadNum;
+
         private InventoryGridManager _gridManager;
         private Slots _parentSlot;
 
@@ -29,7 +29,7 @@ namespace InventoryGridSystem
             if (InventoryItemInteraction.selectedItem != null) _gridManager.RefreshColor(true);
             if (_parentSlot.storedItemObject != null && InventoryItemInteraction.selectedItem == null) 
                 _gridManager.ColorChangeLoop(SlotColorHighlights.Blue , _parentSlot.storedItemSize,_parentSlot.storedItemStartPos);
-            //if (_parentSlot.storedItemObject != null) overlay.UpdateOverlay(parentSlot.storedItem); ---IMPLEMENTAR!!!---
+            
         }
 
         public void PossOffset()
@@ -72,7 +72,6 @@ namespace InventoryGridSystem
         {
             selector = null;
             _gridManager.highlightedSlot = null;
-            //overlay.UpdateOverlay(null); --IMPLEMENTAR--!!!!!!
             if(InventoryItemInteraction.selectedItem != null) _gridManager.RefreshColor(false);
             posOffset = IntVector2.Zero;
             if(_parentSlot.storedItemObject != null && InventoryItemInteraction.selectedItem == null)

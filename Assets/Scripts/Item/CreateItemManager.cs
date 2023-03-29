@@ -29,8 +29,6 @@ namespace Item
             }
             else
             {
-                //IMPLEMENTAR!!!!
-                
                 Debug.LogWarning("Item Added to List");
             }
         }

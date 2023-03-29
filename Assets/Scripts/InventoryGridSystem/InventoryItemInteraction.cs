@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Utility;
 
@@ -9,24 +8,22 @@ namespace InventoryGridSystem
     {
 
         private GameObject _inventoryPanel;
+        private float _slotSize;
+
         public static GameObject selectedItem;
         public static IntVector2 selectedItemSize;
         public static bool isDragging = false;
 
-        private float _slotSize;
-        
         public GameItem item;
 
         private void Awake()
         {
             _slotSize = GameObject.FindGameObjectWithTag("InvenPanel").GetComponent<InventoryGridCreator>().slotSize;
         }
-
         private void Update()
         {
             if (isDragging) selectedItem.transform.position = Input.mousePosition;
         }
-
         public void SetItemObject(GameItem passedItem)
         {
             RectTransform rectTransform = GetComponent<RectTransform>();
@@ -35,7 +32,6 @@ namespace InventoryGridSystem
             item = passedItem;
             GetComponent<Image>().sprite = passedItem.icon;
         }
-        
         public static void SetSelectableItem(GameObject obj)
         {
             selectedItem = obj;
@@ -44,14 +40,11 @@ namespace InventoryGridSystem
             obj.transform.SetParent(GameObject.FindGameObjectWithTag("DragParent").transform);
             obj.GetComponent<RectTransform>().localScale = Vector3.one;
         }
-
         public static void ResetSelectedItem()
         {
             selectedItem = null;
             selectedItemSize = IntVector2.Zero;
             isDragging = false;
         }
-        
-        
     }
 }

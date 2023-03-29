@@ -1036,7 +1036,6 @@ MonoBehaviour:
     x: 0
     y: 0
   listManager: {fileID: 0}
-  selectedButton: {fileID: 0}
 --- !u!114 &1765662589
 MonoBehaviour:
   m_ObjectHideFlags: 0

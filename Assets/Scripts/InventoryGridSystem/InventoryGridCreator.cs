@@ -1,9 +1,8 @@
-using System;
-using InventoryGridSystem;
 using UnityEngine;
 using Utility;
 
-
+namespace InventoryGridSystem
+{
     public class InventoryGridCreator : MonoBehaviour
     {
         public GameObject[,] slotGrid;
@@ -57,5 +56,6 @@ using Utility;
         }
         
     }
+}
     
 

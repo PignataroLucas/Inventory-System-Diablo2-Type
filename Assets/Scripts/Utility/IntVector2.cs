@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
-
 /*
 
 --This script defines an IntVector2 structure, which is a representation of a two-dimensional (2D) vector that uses 
